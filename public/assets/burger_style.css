@@ -1,0 +1,45 @@
+.title{
+color: white;
+}
+
+.burger-icon{
+margin: auto;
+display: block;
+background-color: orange;
+width: 400px;
+height: 400px;
+}
+
+.text-box{
+margin: auto;
+width: 500px;
+}
+
+.create-burger-button{
+margin: auto;
+margin-top: 20px;
+display: block;
+}
+
+.created-burgers{
+margin: auto;
+width: 500px;
+}
+
+.created-burgers-margin{
+margin-top: 25px;   
+}
+
+.burgers-eaten{
+margin: auto;
+width: 500px;
+}
+
+.burgers-eaten-margin{
+margin-top: 25px;
+margin-bottom: 25px;
+}
+
+body{
+    background-color: orange;
+}

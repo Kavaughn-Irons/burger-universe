@@ -1,0 +1,113 @@
+<h1 class="text-center title">Burger Universe</h1>
+
+<img class="text-center burger-icon" src="/burger-image" >
+
+<form class="form-group">
+  <textarea class="form-control rounded-0 text-box" id="createburger" rows="10"></textarea>
+  <button class="btn btn-danger create-burger-button" type="submit">Create Burger</button>
+
+</form>
+
+<div class="container">
+    
+    <div class="row created-burgers-margin">
+        
+        <div class="col-lg-12">
+            <div class="card created-burgers">
+              <h5 class="card-header">Created Burgers</h5>
+              <div class="card-body">
+
+                    <ol>
+                      {{#each notDevoured}}
+                      <li>
+                        <p>
+                           {{this.burger}}
+                            
+                            <button data-burgerid="{{this.id}}" class="delburger btn btn-danger">Eat Burger</button>
+
+                        </p>
+                      </li>
+                      {{/each}}
+                    </ol>
+
+              </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <div class="row burgers-eaten-margin">
+        
+        <div class="col-lg-12">
+            <div class="card burgers-eaten">
+              <h5 class="card-header">Burgers Eaten</h5>
+              <div class="card-body">
+
+
+                <ol>
+                  {{#each Devoured}}
+                  <li>
+                    <p>
+                       {{this.burger}}
+
+                    </p>
+                  </li>
+                  {{/each}}
+                </ol>
+                  
+              </div>
+            </div>
+        </div>
+        
+    </div>
+
+</div>
+
+<script type="text/javascript">
+ 
+$.get( "/body-size", function( data ) {
+console.log(data);
+});    
+    
+    
+$(".delburger").on("click", function(event) {
+    // Get the ID from the button.
+    // This is shorthand for $(this).attr("data-planid")
+    var id = $(this).data("burgerid");
+
+    // Send the DELETE request.
+    $.ajax("/api/burgers/" + id, {
+      type: "DELETE"
+    }).then(
+      function() {
+        console.log("deleted id ", id);
+        // Reload the page to get the updated list
+        location.reload();
+      }
+    );
+  });
+
+  $(".create-burger-button").on("click", function(event) {
+    // Make sure to preventDefault on a submit event.
+    event.preventDefault();
+
+    // [name=plan] will find an element with a "name" attribute equal to the string "plan"
+    var newPlan = {
+      plan: $("#createburger").val().trim()
+    };
+
+    // Send the POST request.
+    $.ajax("/api/burgers", {
+      type: "POST",
+      data: newPlan
+    }).then(
+      function() {
+        console.log("created new plan");
+        // Reload the page to get the updated list
+        location.reload();
+      }
+    );
+  });
+
+
+</script>
